@@ -1,0 +1,26 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: jwt-auth-enable
+spec:
+  selector:
+    matchLabels:
+      app: itemacon-server
+  jwtRules:
+  - issuer: "testing@secure.istio.io"
+    jwksUri: "https://raw.githubusercontent.com/istio/istio/release-1.10/security/tools/jwt/samples/jwks.json"
+
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: require-jwt-auth-enable
+spec:
+  selector:
+    matchLabels:
+      app: itemacon-server
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+       requestPrincipals: ["testing@secure.istio.io/testing@secure.istio.io"]
