@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: itemacon-simple-client-deployment
+  name: itemacon-client-deployment
   labels:
-    app: itemacon-simple-client
+    app: itemacon-client
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: itemacon-simple-client
+      app: itemacon-client
   template:
     metadata:
       labels:
-        app: itemacon-simple-client
+        app: itemacon-client
     spec:
       containers:
-        - name: itemacon-simple-client
-          image: jafossum/itemacon-simple-client
+        - name: itemacon-client
+          image: jafossum/itemacon-client
           ports:
             - containerPort: 8080
           env:
