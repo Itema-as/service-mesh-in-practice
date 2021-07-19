@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: itemacon-simple-client-serviceaccount-deployment
+  labels:
+    app: itemacon-simple-client-sa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: itemacon-simple-client-sa
+  template:
+    metadata:
+      labels:
+        app: itemacon-simple-client-sa
+    spec:
+      serviceAccountName: sa-service-client
+      containers:
+        - name: itemacon-simple-client-sa
+          image: jafossum/itemacon-simple-client
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ITEMA_CLIENT_ADDRESS
+              value: "itemacon-server-service"
+            - name: ITEMA_CLIENT_PORT
+              value: "8080"
