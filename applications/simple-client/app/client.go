@@ -20,9 +20,14 @@ const (
 	defaultIP   = "127.0.0.1"
 	defaultPort = 8080
 
-	hostEnv = "ITEMA_CLIENT_ADDRESS"
-	portEnv = "ITEMA_CLIENT_PORT"
+	authHeader = "Authorization"
+
+	hostEnv  = "ITEMA_CLIENT_ADDRESS"
+	portEnv  = "ITEMA_CLIENT_PORT"
+	tokenEnv = "ITEMA_TOKEN"
 )
+
+var Token string
 
 type response struct {
 	Data  string `json:"data,omitempty"`
@@ -48,6 +53,7 @@ func main() {
 	if err != nil && pn != 0 {
 		*po = pn
 	}
+	Token = os.Getenv(tokenEnv)
 
 	addr := "http://" + *ip + ":" + strconv.Itoa(*po) + endpoint
 	fmt.Println("Address: " + addr)
@@ -70,7 +76,16 @@ func loopReuest(addr string, i int) {
 }
 
 func makeGetRequest(addr string) error {
-	resp, err := http.Get(addr)
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", addr, nil)
+	if err != nil {
+		return err
+	}
+
+	if Token != "" {
+		req.Header.Set(authHeader, "Bearer "+Token)
+	}
+	resp, err := client.Do(req)
 	if err != nil {
 		return err
 	}

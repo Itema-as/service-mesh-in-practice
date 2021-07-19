@@ -16,7 +16,7 @@ import (
 const (
 	authHeader = "Authorization"
 
-	portEnv = "ITEMA_SERVER_PORT"
+	portEnv  = "ITEMA_SERVER_PORT"
 )
 
 var R *rand.Rand
@@ -41,14 +41,13 @@ func main() {
 	R = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	// Run server
-	http.HandleFunc("/resource", RandResponse)
-	http.HandleFunc("/token", CheckToken)
+	http.HandleFunc("/resource", Resource)
 	log.Println("Server started - Port: " + strconv.Itoa(*p))
 	http.ListenAndServe(":"+strconv.Itoa(*p), nil)
 }
 
-func CheckToken(w http.ResponseWriter, r *http.Request) {
-	log.Println("CheckToken called")
+func Resource(w http.ResponseWriter, r *http.Request) {
+	log.Println("Resource called")
 
 	// Random fail
 	if R.Intn(100) < 30 {
@@ -57,8 +56,6 @@ func CheckToken(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(response{Error: "Random failure"})
 		return
 	}
-
-	// Get header and validate
 	if r.Header[authHeader] != nil {
 		hd := strings.Split(r.Header[authHeader][0], " ")
 		if len(hd) != 2 {
@@ -77,22 +74,6 @@ func CheckToken(w http.ResponseWriter, r *http.Request) {
 		}
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(response{Data: "Token: " + token})
-		return
-	}
-	log.Println("No Authorization header provided")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(response{Data: "OK"})
-	return
-}
-
-func RandResponse(w http.ResponseWriter, r *http.Request) {
-	log.Println("RandResponse called")
-
-	// Random fail
-	if R.Intn(100) < 30 {
-		log.Println("Random failure")
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(response{Error: "Random failure"})
 		return
 	}
 	w.WriteHeader(http.StatusOK)
