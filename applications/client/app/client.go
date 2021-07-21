@@ -99,8 +99,7 @@ func makeGetRequest(addr string) error {
 	r := response{}
 	err = json.Unmarshal(body, &r)
 	if err != nil {
-		log.Println(err)
-		return nil
+		return err
 	}
 
 	log.Println(r)
