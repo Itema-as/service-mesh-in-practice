@@ -1,4 +1,4 @@
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: itemacon-vs-server
@@ -7,17 +7,14 @@ spec:
     - itemacon-server-service.default.svc.cluster.local
   http:
     - retries:
-        attempts: 3
+        attempts: 5
         perTryTimeout: 2s
         retryOn: 5xx
       route:
         - destination:
             host: itemacon-server-service.default.svc.cluster.local
-    - fault:
+      fault:
         delay:
           percentage:
             value: 10
           fixedDelay: 5s
-      route:
-        - destination:
-            host: itemacon-server-service.default.svc.cluster.local
