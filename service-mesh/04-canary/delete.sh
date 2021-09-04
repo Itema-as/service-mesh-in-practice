@@ -1,0 +1,7 @@
+#!/bin/bash
+
+kubectl delete -f ../resources/server.yaml
+kubectl delete -f ../resources/client.yaml
+
+kubectl delete -f ../resources/vs-retry-canary.yaml
+kubectl delete -f ../resources/server_v2.yaml

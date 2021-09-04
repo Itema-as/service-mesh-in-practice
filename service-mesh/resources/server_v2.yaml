@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: itemacon-server-deployment-v2
+  labels:
+    app: itemacon-server-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: itemacon-server
+  template:
+    metadata:
+      labels:
+        app: itemacon-server
+        version: v2
+    spec:
+      containers:
+        - name: itemacon-server-v2
+          image: jafossum/itemacon-server
+          ports:
+            - containerPort: 8080
