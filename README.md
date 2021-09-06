@@ -8,7 +8,7 @@ Any kubernetes cluster with a configured kubectl can be used for these exercises
 
 ### Starting Minikube
 
-    minikubs start --memory=8192 --cpus=4
+    minikube start --memory=8192 --cpus=4
 
 Istio wants some more resources to be available than the defult, so you might need to go into your docker engine settings and adjust CPU and memory allocation
 
