@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: itemacon-client-jwt
-          image: jafossum/itemacon-client
+          image: ghcr.io/itema-as/service-mesh-in-practice-client
           ports:
             - containerPort: 8080
           env:

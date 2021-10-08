@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: itemacon-server-v1
-          image: jafossum/itemacon-server
+          image: ghcr.io/itema-as/service-mesh-in-practice-server
           ports:
             - containerPort: 8080
 

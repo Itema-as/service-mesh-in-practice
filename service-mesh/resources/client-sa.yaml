@@ -17,7 +17,7 @@ spec:
       serviceAccountName: sa-service-client
       containers:
         - name: itemacon-client-sa
-          image: jafossum/itemacon-client
+          image: ghcr.io/itema-as/service-mesh-in-practice-client
           ports:
             - containerPort: 8080
           env:
