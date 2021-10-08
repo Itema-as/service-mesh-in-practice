@@ -1,5 +1,5 @@
 # Build image
-docker build app/. -t jafossum/itemacon-server
+docker build app/. -t ghcr.io/itema-as/service-mesh-in-practice-server
 
 # Push image
-docker push jafossum/itemacon-server
+docker push ghcr.io/itema-as/service-mesh-in-practice-server
