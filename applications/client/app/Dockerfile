@@ -36,7 +36,8 @@ FROM scratch
 
 ###########################################################################################
 LABEL dev.azure.com.sogodigital.maintainer="John A. Fossum <john.fossum@itema.no>"  \
-    dev.azure.com.sogodigital.description="Runtime image for GO service"
+    dev.azure.com.sogodigital.description="Runtime image for GO service"  \
+    org.opencontainers.image.source="https://github.com/Itema-as/service-mesh-in-practice"
 ###########################################################################################
 
 # Copy generic resources from build
