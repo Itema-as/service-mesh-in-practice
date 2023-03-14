@@ -35,8 +35,8 @@ RUN CGO_ENABLED=0 go build -o /app/app server.go
 FROM scratch
 
 ###########################################################################################
-LABEL dev.azure.com.sogodigital.maintainer="John A. Fossum <john.fossum@itema.no>"  \
-    dev.azure.com.sogodigital.description="Runtime image for GO service"  \
+LABEL github.com.itema-as.maintainer="John A. Fossum <john.fossum@itema.no>"  \
+    github.com.itema-as.description="Runtime image for GO service"  \
     org.opencontainers.image.source="https://github.com/Itema-as/service-mesh-in-practice"
 ###########################################################################################
 
